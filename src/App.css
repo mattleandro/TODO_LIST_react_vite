@@ -7,6 +7,10 @@ body {
   background-position: center;
   background-size: cover;
   min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .app {
@@ -15,6 +19,7 @@ body {
   background-color: #efefef;
   padding: 20px 30px;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -127,4 +132,39 @@ select {
 
 .filter-options div {
   flex: 1 1 0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .app {
+    max-width: 90%;
+    padding: 15px 20px;
+  }
+
+  .filter-options {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  button {
+    padding: 8px;
+    margin: 5px 0;
+  }
+
+  .todo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+  }
 }

@@ -29,7 +29,7 @@ const Todo = ({
         </button>
 
         <button onClick={() => removeTodo(todoProps.id)} className="remove">
-          X
+          deletar
         </button>
       </div>
 

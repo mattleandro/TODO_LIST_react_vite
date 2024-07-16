@@ -9,6 +9,12 @@ const Todo = ({
   openModal,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [backgroundClass, setBackgroundClass] = useState("");
+
+  const handleCompleteClick = () => {
+    completeTodo(todoProps.id);
+    setBackgroundClass("completed-background");
+  };
 
   const handleEditClick = () => {
     if (todoProps.isCompleted) {
@@ -30,7 +36,11 @@ const Todo = ({
         </div>
       )}
 
-      <div className={`todo ${todoProps.isCompleted ? "complete" : ""}`}>
+      <div
+        className={`todo ${
+          todoProps.isCompleted ? "complete" : ""
+        } ${backgroundClass}`}
+      >
         <div className="todo-text">{todoProps.text}</div>
         <div className="todo-category">{todoProps.category}</div>
         <div className="button-content">
@@ -38,7 +48,7 @@ const Todo = ({
             className={`complete-btn ${
               todoProps.isCompleted ? "complete" : ""
             }`}
-            onClick={() => completeTodo(todoProps.id)}
+            onClick={handleCompleteClick}
           >
             {todoProps.isCompleted ? "Abrir" : "Completar"}
           </button>

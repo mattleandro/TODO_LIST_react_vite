@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Todo from "./Components/Todo";
 import TodoForm from "./Components/TodoForm";
 import Search from "./Components/Search";
 import Filter from "./Components/Filter";
-
+import ModalForm from "./Components/ModalForm";
 const App = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
@@ -32,6 +32,9 @@ const App = () => {
       isEditing: false,
     },
   ]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editTodo, setEditTodo] = useState(null);
 
   const addTodo = (text, category) => {
     const newTodos = [
@@ -67,23 +70,33 @@ const App = () => {
     setTodos(newTodos);
   };
 
-  const editTodo = (id, newValue) => {
-    setTodos((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              text: newValue.text,
-              category: newValue.category,
-              isEditing: false,
-            }
-          : item
-      )
+  const editTodoItem = (id, newValue) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id
+        ? {
+            ...todo,
+            text: newValue.text,
+            category: newValue.category,
+            isEditing: false,
+          }
+        : todo
     );
+    setTodos(updatedTodos);
+    closeModal();
+  };
+
+  const openModal = (todo) => {
+    setEditTodo(todo);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditTodo(null);
   };
 
   return (
-    <div className="app">
+    <div className={`app ${isModalOpen ? "active-modal" : ""}`}>
       <Search search={search} setSearch={setSearch} />
       <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
       <h1>Lista de Tarefas</h1>
@@ -111,12 +124,25 @@ const App = () => {
               removeTodo={removeTodo}
               completeTodo={completeTodo}
               toggleEdit={toggleEdit}
-              editTodo={editTodo}
+              openModal={() => openModal(todo)}
             />
           ))}
       </div>
 
       <TodoForm onSubmit={addTodo} />
+
+      {isModalOpen && (
+        <div className="modal">
+          <div className="overlay" onClick={closeModal}></div>
+          <div className="modal-content">
+            <ModalForm
+              edit={editTodo}
+              onSubmit={editTodoItem}
+              closeModal={closeModal}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

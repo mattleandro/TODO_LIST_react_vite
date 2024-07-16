@@ -75,13 +75,21 @@ select {
   margin-bottom: 10px;
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
-.complete {
+
+.complete-btn {
   background-color: #5cb85c;
 }
+
+.edit-btn {
+  background-color: #fffb00;
+  color: darkgray;
+}
 .remove {
+  background-color: #d9534f;
+}
+.close-modal {
   background-color: #d9534f;
 }
 
@@ -104,12 +112,14 @@ select {
   transition: 0.3s;
   margin-right: 10px;
 }
+
 .edit-btn:hover {
   opacity: 1;
 }
 
 .button-content {
   display: flex;
+  margin-top: 10px;
 }
 
 .edit-component {
@@ -134,7 +144,17 @@ select {
   flex: 1 1 0;
 }
 
-/* Media Queries for Responsiveness */
+.todo-text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.todo-category {
+  font-style: italic;
+  color: gray;
+  margin-top: 4px;
+}
+
 @media (max-width: 768px) {
   .app {
     max-width: 90%;
@@ -167,4 +187,63 @@ select {
     padding: 8px;
     margin-bottom: 15px;
   }
+}
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  background: white;
+  border-radius: 10px;
+}
+
+.close-modal {
+  background-color: #d9534f;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.close-modal:hover {
+  opacity: 1;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
 }

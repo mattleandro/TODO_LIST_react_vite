@@ -184,13 +184,17 @@ body.active-modal {
   font-size: 18px;
 }
 
-.modal.overlay {
+.modal,
+.overlay {
   width: 100vw;
   height: 100vh;
-  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
 }
+
 .overlay {
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -201,13 +205,21 @@ body.active-modal {
 }
 
 .modal-content {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 1;
+  margin: auto;
   padding: 20px;
   border: 1px solid #888;
+  width: 80%;
   max-width: 500px;
   background: white;
   border-radius: 10px;
+  margin-top: 200px;
 }
+
 .close-modal {
   background-color: #d9534f;
   color: #fff;

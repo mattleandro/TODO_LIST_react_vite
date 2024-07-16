@@ -9,18 +9,14 @@ const Todo = ({
   openModal,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [backgroundClass, setBackgroundClass] = useState("");
 
   const handleCompleteClick = () => {
     completeTodo(todoProps.id);
-    setBackgroundClass("completed-background");
   };
 
   const handleEditClick = () => {
     if (todoProps.isCompleted) {
-      setErrorMessage(
-        "Não é possível editar uma tarefa concluída. Ative a tarefa para editá-la."
-      );
+      setErrorMessage("Ative a tarefa para edita-la!");
     } else {
       setErrorMessage("");
       openModal();
@@ -37,9 +33,10 @@ const Todo = ({
       )}
 
       <div
-        className={`todo ${
-          todoProps.isCompleted ? "complete" : ""
-        } ${backgroundClass}`}
+        className="todo"
+        style={{
+          backgroundColor: todoProps.isCompleted ? "#5cb85c" : "white",
+        }}
       >
         <div className="todo-text">{todoProps.text}</div>
         <div className="todo-category">{todoProps.category}</div>
